@@ -8,6 +8,9 @@ services:
      - "8080:80"
     volumes:
      - ./web:/var/www/html
+    secrets:
+     - ssl-cert
+     - ssl-key
   
    worpdress:
      build: requirements/wordpress/.
@@ -25,3 +28,9 @@ services:
 
 networks:
   inception:
+
+secrets:
+  ssl-cert:
+    file: ../secrets/self-signed.crt
+  ssl-key:
+    file: ../secrets/self-signed.key
