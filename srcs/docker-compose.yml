@@ -1,0 +1,60 @@
+#version: "3.8"
+
+services:
+   nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    ports:
+     - "8080:80"
+    volumes:
+     - ./web:/var/www/html
+    secrets:
+      - selfsigned.key
+      - selfsigned.crt
+    env_file:
+      - .env
+  
+   worpdress:
+     build: requirements/wordpress/.
+     container_name: wp-php
+     volumes:
+      - ./web:/var/www/html
+     secrets:
+      - wp_admin_e.txt
+      - wp_admin_n.txt
+      - wp_admin_p.txt
+      - wp_user_p.txt
+      - db_pwd.txt
+     expose: 
+      - 9000
+     env_file:
+      - .env
+
+   mariadb:
+     build: requirements/mariadb/.
+     container_name: mariadb
+     volumes:
+      - ./database:/var/lib/mysql
+     secrets:
+      - db_pwd.txt
+     env_file:
+      - .env
+
+networks:
+  inception:
+
+secrets:
+  selfsigned.key:
+    file: ../secrets/selfsigned.key
+  selfsigned.crt:
+    file: ../secrets/selfsigned.crt
+  db_pwd.txt:
+    file: ../secrets/db_pwd.txt
+  wp_admin_e.txt:
+    file: ../secrets/wp_admin_e.txt
+  wp_admin_n.txt:
+    file: ../secrets/wp_admin_n.txt
+  wp_admin_p.txt:
+    file: ../secrets/wp_admin_p.txt
+  wp_user_p.txt:
+    file: ../secrets/wp_user_p.txt
