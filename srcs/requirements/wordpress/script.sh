@@ -24,4 +24,4 @@ else
     echo "Wordpress already installed"
 fi
 
-exec "php-fpm8.4" "-F"
+exec "php-fpm8.2" "-F"

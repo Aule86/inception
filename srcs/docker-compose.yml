@@ -13,6 +13,8 @@ services:
       - ssl-key
     depends_on:
       - wordpress
+    networks:
+      inception:
 
   wordpress:
     build: requirements/wordpress/.
@@ -31,6 +33,8 @@ services:
       - wp-user-password
     depends_on:
       - mariadb
+    networks:
+      inception:
     
   mariadb:
     build: requirements/mariadb/.
@@ -42,7 +46,11 @@ services:
     secrets:
       - db-user
       - db-password
+    networks:
+      inception:
 
+networks:
+      inception:
 
 secrets:
   ssl-cert:
