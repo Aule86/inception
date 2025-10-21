@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-RUN apt update && apt upgrade -y && apt install -y php-fpm php-mysqli curl
+RUN apt update && apt upgrade -y && apt install -y php-fpm php-mysqli curl netcat-openbsd
 
 COPY www.conf /etc/php/8.2/fpm/pool.d/.
 COPY script.sh .

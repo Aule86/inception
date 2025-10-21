@@ -10,6 +10,7 @@ dbpwd=$(cut -f2 /run/secrets/db-password)
 if ! [ -e /var/www/html/wp-config.php ]; then
     cd /var/www/html
     rm -rf /var/www/html/*
+
     if ! [ -e /usr/local/bin/wp ]; then
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
         chmod +x wp-cli.phar
